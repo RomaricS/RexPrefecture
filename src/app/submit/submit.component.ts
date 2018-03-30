@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { RexService } from '../rex.service';
+import { Observable } from '@firebase/util';
 
 @Component({
   selector: 'app-submit',
@@ -8,7 +9,8 @@ import { RexService } from '../rex.service';
   styleUrls: ['./submit.component.css'],
   providers: [RexService]
 })
-export class SubmitComponent implements OnInit {
+
+export class SubmitComponent {
 
   correct;
   today = new Date();
@@ -32,24 +34,25 @@ export class SubmitComponent implements OnInit {
 
   cdsType;
 
+  // Data for subscription
+  b;
+  a;
+
   constructor(public router: Router,
-    private rex: RexService) { 
-      let a = this.rex.getCdsType();
-      a.subscribe(res => {
-        if (res){
-          this.cdsType = res[0];
-        }
-      });
+    private rex: RexService) {
+    this.a = this.rex.getCdsType();
+    this.a.subscribe(res => {
+      if (res) {
+        this.cdsType = res[0];
+      }
+    });
 
-      let b = this.rex.getPref();
-      b.subscribe(res => {
-        if (res){
-          this.prefList = res[0];
-        }
-      });
-     }
-
-  ngOnInit() {
+    this.b = this.rex.getPref();
+    this.b.subscribe(res => {
+      if (res) {
+        this.prefList = res[0];
+      }
+    });
   }
 
   // Calculate full process duration
