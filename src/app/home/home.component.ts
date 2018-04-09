@@ -44,8 +44,24 @@ export class HomeComponent {
       this.prefList = this.data.filter(list => list.idDept === id);
     }
      
-    sortDept(data){
-      
+    sortDept(){
+    const c = a.idDept;
+    const d = b.idDept;
+    if (c<d)
+       return -1;
+    if (c>d)
+       return 1;
+    return 0;
+    }
+     
+    sortPref(){
+    const c = a.id;
+    const d = b.id;
+    if (c<d)
+       return -1;
+    if (c>d)
+       return 1;
+    return 0;
     }
 
 
