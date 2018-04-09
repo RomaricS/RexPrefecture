@@ -20,7 +20,7 @@ export class HomeComponent {
     this.rex.getPref().subscribe(res => {
       if (res) {
         console.log(res);
-        this.prefList = res[0];
+        this.prefList = res;
       }
     });
   }
