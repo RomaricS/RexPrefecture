@@ -28,7 +28,7 @@
                     <span class="text-danger">*</span>
                   </label>
                   <select class="form-control" id="type" [(ngModel)]="data.prefecture">
-                    <option *ngFor="let pref of prefList" [value]="pref.id">{{pref.name}}</option>
+                    <option *ngFor="let pref of prefList" [value]="pref.id">{{pref.pref}}</option>
                   </select>
                 </div>
               </div>
