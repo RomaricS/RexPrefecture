@@ -32,9 +32,11 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 Add filter for prefecture : All Pref, and per Department using the link between Dept and pref
 Add confirmation modal before triggering a save action
 Add notification pop up when an action is done
-Test the above for v1
+Add Facebook login
+Test and deploy
 
 ## V2 Features
+Add Account creation (email/pass)
 Add Admin like page for admistration (might be accessible for selected users <-- FB groups admin may be)
 Add support for APS process
 Add support for renewing card process Working, studies, familly card
