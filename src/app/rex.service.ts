@@ -22,6 +22,11 @@ export class RexService {
   getPref() {
     return this.firebase.list('/prefList').valueChanges();
   }
+  
+  // Get All Dept
+  getDept() {
+    return this.firebase.list('/deptList').valueChanges();
+  }
 
   // Get All Pref
   getCdsType() {
