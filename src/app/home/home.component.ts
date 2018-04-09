@@ -12,18 +12,41 @@ import { Observable } from '@firebase/util';
 export class HomeComponent {
 
   prefList;
+  data;
+  deptList;
 
   constructor(
     public router: Router,
     private rex: RexService
   ) {
+      // Get dept List
+     this.rex.getDept().subscribe(res => {
+      if (res) {
+        this.deptList = res;
+      }
+    });
+      
+      // Get pref list
     this.rex.getPref().subscribe(res => {
       if (res) {
-        console.log(res);
-        this.prefList = res;
+        this.data = res;
+        this.prefList = this.data;
       }
     });
   }
+  
+   filterPref(id) {
+    if (id === 0){
+      // Show all pref
+        this.prefList = this.data;
+    }else{
+      // Filter based on dept id
+      this.prefList = this.data.filter(list => list.idDept === id);
+    }
+     
+    sortDept(data){
+      
+    }
 
 
   viewDetail(id) {
