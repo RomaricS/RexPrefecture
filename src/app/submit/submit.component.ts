@@ -50,7 +50,7 @@ export class SubmitComponent {
     this.b = this.rex.getPref();
     this.b.subscribe(res => {
       if (res) {
-        this.prefList = res[0];
+        this.prefList = res;
       }
     });
   }
