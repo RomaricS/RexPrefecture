@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
- 
+import { Rex } from './model/rex';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class RexService {
@@ -8,23 +9,26 @@ export class RexService {
   rexList: AngularFireList<any>;
   selectedRex;
 
-  constructor(private firebase : AngularFireDatabase) { }
+  public basePath = '/rex';
 
-  getData(){
-    this.rexList = this.firebase.list('rex');
-    return this.rexList;
+
+  constructor(private firebase: AngularFireDatabase) { }
+
+  getRex() {
+    return this.firebase.list('/rex').valueChanges();
   }
- 
-  // insertEmployee(employee : Employee)
-  // {
-  //   this.rexList.push({
-  //     name: employee.name,
-  //     position: employee.position,
-  //     office: employee.office,
-  //     salary: employee.salary
-  //   });
+
+  // getRexByPref(pref) : Rex[] {
+  //   return this.firebase.list('/rex',
+  //     res => res.orderByChild('prefecture').equalTo(pref));
   // }
- 
+
+  insertRex(data: Rex) {
+    const obj = this.firebase.database.ref(this.basePath);
+    obj.push(data);
+    console.log("Succes");
+  }
+
   // updateEmployee(employee : Employee){
   //   this.rexList.update(employee.$key,
   //     {
@@ -34,9 +38,8 @@ export class RexService {
   //       salary: employee.salary
   //     });
   // }
- 
+
   // deleteEmployee($key : string){
   //   this.rexList.remove($key);
   // }
-
 }

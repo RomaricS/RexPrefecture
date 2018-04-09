@@ -5,8 +5,7 @@ import { RexService } from '../rex.service';
 @Component({
   selector: 'app-submit',
   templateUrl: './submit.component.html',
-  styleUrls: ['./submit.component.css'],
-  providers: [RexService]
+  styleUrls: ['./submit.component.css']
 })
 export class SubmitComponent implements OnInit {
 
@@ -97,7 +96,7 @@ export class SubmitComponent implements OnInit {
     if (this.data.sentAt && this.data.takenAt) {
       let diff = (new Date(this.data.takenAt).getTime() - new Date(this.data.sentAt).getTime());
       let duree = diff / (1000 * 3600 * 24);
-      console.log(duree);
+      console.log("Durée du prociess ",duree, " jours");
       this.data.processDuration = duree;
     }
   }
@@ -129,15 +128,9 @@ export class SubmitComponent implements OnInit {
     if (this.correct) {
       this.calculateduration();
       // Save to firebase
-
+      this.rex.insertRex(this.data);
       // Redirection to home
-      this.router.navigate(['/']);
+      // this.router.navigate(['/']);
     }
-
-
-
   }
-
-
-
 }

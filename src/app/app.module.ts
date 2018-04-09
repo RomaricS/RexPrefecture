@@ -17,6 +17,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { IdeaComponent } from './idea/idea.component';
 import { ContactComponent } from './contact/contact.component';
 import { SubmitComponent } from './submit/submit.component';
+import { RexService } from './rex.service';
 
 
 @NgModule({
@@ -35,7 +36,7 @@ import { SubmitComponent } from './submit/submit.component';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [RexService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

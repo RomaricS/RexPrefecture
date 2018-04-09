@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
   prefList = [
     {
@@ -49,9 +49,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     public router: Router
-  ) { }
+  ) {
 
-  ngOnInit() {
   }
 
   viewDetail(id) {
