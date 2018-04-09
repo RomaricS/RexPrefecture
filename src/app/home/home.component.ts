@@ -19,18 +19,18 @@ export class HomeComponent {
     public router: Router,
     private rex: RexService
   ) {
-      // Get dept List
+    // Get dept List
      this.rex.getDept().subscribe(res => {
       if (res) {
-        this.deptList = res;
+        this.deptList = res.sort(this.sortDept);
       }
     });
       
-      // Get pref list
+    // Get pref list
     this.rex.getPref().subscribe(res => {
       if (res) {
         this.data = res;
-        this.prefList = this.data;
+        this.prefList = this.data.sort(this.sortPref);
       }
     });
   }
