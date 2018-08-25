@@ -1,62 +1,71 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { RexService } from '../rex.service';
+import { Observable } from '@firebase/util';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  providers: [RexService]
 })
 export class HomeComponent {
 
-  prefList = [
-    {
-      name: 'Nanterre',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.',
-      id: 1,
-      img: 'assets/img/img.jpg'
-    },
-    {
-      name: 'Antony',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.',
-      id: 2,
-      img: 'assets/img/img.jpg'
-    },
-    {
-      name: 'Bobigny',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.',
-      id: 3,
-      img: 'assets/img/img.jpg'
-    },
-    {
-      name: 'Paris',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.',
-      id: 4,
-      img: 'assets/img/img.jpg'
-    },
-    {
-      name: 'St Germain en Laye',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.',
-      id: 5,
-      img: 'assets/img/img.jpg'
-    },
-    {
-      name: 'Cergy',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.',
-      id: 6,
-      img: 'assets/img/img.jpg'
-    }
-  ];
+  prefList;
+  data;
+  deptList;
 
   constructor(
-    public router: Router
+    public router: Router,
+    private rex: RexService
   ) {
+    // Get dept List
+    this.rex.getDept().subscribe(res => {
+      if (res) {
+        this.deptList = res;
+        this.deptList.sort(function (a, b) {
+          const c = a.idDept;
+          const d = b.idDept;
+          if (c < d)
+            return -1;
+          if (c > d)
+            return 1;
+          return 0;
+        });
+      }
+    });
 
+    // Get pref list
+    this.rex.getPref().subscribe(res => {
+      if (res) {
+        this.data = res;
+        this.prefList = this.data.sort(function (a, b) {
+          const c = a.id;
+          const d = b.id;
+          if (c < d)
+            return -1;
+          if (c > d)
+            return 1;
+          return 0;
+        });
+      }
+    });
   }
 
-  viewDetail(id) {
-    if (id) {
-      this.router.navigate(['/detail', id]);
+  filterPref(id) {
+    if (id === 0) {
+      // Show all pref
+      this.prefList = this.data;
+    } else {
+      // Filter based on dept id
+      this.prefList = this.data.filter(list => list.idDept === id);
     }
   }
 
-}
+    viewDetail(id) {
+      if (id) {
+        this.router.navigate(['/detail', id]);
+      }
+    }
+
+  }

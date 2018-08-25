@@ -5,12 +5,12 @@
 
       <div class="col-md-3 pref-box" *ngFor="let pref of prefList;let i = index">
         <div class="card no-pad" (click)="viewDetail(pref.id)">
-          <img class="card-img-top" src="{{pref.img}}" alt="Card image cap">
+          <img class="card-img-top" src="assets/img/img.jpg" alt="Card image cap">
           <div class="card-body">
             <span class="pref-name">
-              {{pref.name}}
+              {{pref.pref}}
             </span>
-            <p class="card-text">{{pref.description}}</p>
+            <p class="card-text">Une petite description</p>
           </div>
         </div>
       </div>

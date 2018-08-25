@@ -21,104 +21,108 @@
                   <input type="text" id="name" [(ngModel)]="data.name" placeholder="Jon Snow" class="form-control" />
                 </div>
               </div>
-              <!-- Select Préfecture -->
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label for="type">Préfecture
-                    <span class="text-danger">*</span>
-                  </label>
-                  <select class="form-control" id="type" [(ngModel)]="data.prefecture">
-                    <option *ngFor="let pref of prefList" [value]="pref.id">{{pref.name}}</option>
-                  </select>
-                </div>
-              </div>
-              <!-- Select REX type -->
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="type">Type de CDS
-                    <span class="text-danger">*</span>
-                  </label>
-                  <select class="form-control" id="type" [(ngModel)]="data.typeCDS">
-                    <option *ngFor="let type of cdsType" [value]="type.id">{{type.name}}</option>
-                  </select>
-                </div>
-              </div>
             </div>
 
-            <!-- Deuxieme ligne -->
-            <div class="row">
-              <!-- Date de dépot + type de dépot (envoi/dépot) -->
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label for="date1">Dossier {{processInitType}} le
-                    <span class="text-danger">*</span>
-                  </label>
-                  <input type="date" id="date1" [(ngModel)]="data.sentAt" class="form-control" />
-                  <label class="form-check-label spaceTop">
-                    <input class="form-check-input" (ngModelChange)="switchInitLabel(data.inLocal)" [(ngModel)]="data.inLocal" type="checkbox">
-                    <span class="form-check-sign">Dossier déposé sur place ?</span>
-                  </label>
-                </div>
-              </div>
+              <div class="row">
 
-              <!-- Date prise d'empreinte -->
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label for="date2">Dépot d'empreinte le
-                    <span class="text-danger">*</span>
-                  </label>
-                  <input type="date" id="date2" [(ngModel)]="data.fingerprintAt" class="form-control" />
+                  <!-- Select Préfecture -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="type">Préfecture
+                        <span class="text-danger">*</span>
+                      </label>
+                      <select class="form-control" id="type" [(ngModel)]="data.prefecture">
+                        <option *ngFor="let pref of prefList" [value]="pref.id">{{pref.pref}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <!-- Select REX type -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="type">Type de CDS
+                        <span class="text-danger">*</span>
+                      </label>
+                      <select class="form-control" id="type" [(ngModel)]="data.typeCDS">
+                        <option *ngFor="let type of cdsType" [value]="type.id">{{type.name}}</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
-              </div>
 
-              <!-- date SMS -->
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label for="date3">Sms reçu le
-                    <span class="text-danger">*</span>
-                  </label>
-                  <input type="date" id="date3" [(ngModel)]="data.smsAt" class="form-control" />
+                <!-- Deuxieme ligne -->
+                <div class="row">
+                  <!-- Date de dépot + type de dépot (envoi/dépot) -->
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="date1">Dossier {{processInitType}} le
+                        <span class="text-danger">*</span>
+                      </label>
+                      <input type="date" id="date1" [(ngModel)]="data.sentAt" class="form-control" />
+                      <label class="form-check-label spaceTop">
+                        <input class="form-check-input" (ngModelChange)="switchInitLabel(data.inLocal)" [(ngModel)]="data.inLocal" type="checkbox">
+                        <span class="form-check-sign">Dossier déposé sur place ?</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- Date prise d'empreinte -->
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="date2">Dépot d'empreinte le
+                        <span class="text-danger">*</span>
+                      </label>
+                      <input type="date" id="date2" [(ngModel)]="data.fingerprintAt" class="form-control" />
+                    </div>
+                  </div>
+
+                  <!-- date SMS -->
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="date3">Sms reçu le
+                        <span class="text-danger">*</span>
+                      </label>
+                      <input type="date" id="date3" [(ngModel)]="data.smsAt" class="form-control" />
+                    </div>
+                  </div>
+
+                  <!-- date retrait -->
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="date4">Retrait de la carte le
+                        <span class="text-danger">*</span>
+                      </label>
+                      <input type="date" id="date4" (ngModelChange)="calculateduration()" [(ngModel)]="data.takenAt" class="form-control" />
+                    </div>
+                  </div>
+
                 </div>
-              </div>
 
-              <!-- date retrait -->
-              <div class="col-md-3">
-                <div class="form-group">
-                  <label for="date4">Retrait de la carte le
-                    <span class="text-danger">*</span>
-                  </label>
-                  <input type="date" id="date4" (ngModelChange)="calculateduration()" [(ngModel)]="data.takenAt" class="form-control" />
+                <!-- Troisieme ligne -->
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="comment">Un commentaire ? </label>
+                      <textarea id="comment" [(ngModel)]="data.comment" class="form-control" rows="3"></textarea>
+                    </div>
+                  </div>
                 </div>
-              </div>
 
+                <!-- Bouton de soumission -->
+                <div class="row">
+                  <div class="col-md-12 text-center spaceY">
+                    <button class="btn btn-primary" (click)="submitNewREX()">Soumettre votre REX</button>
+                  </div>
+                </div>
+
+
+                <!-- The actual snackbar -->
+                <div class="snackbar" [ngClass]="{'show': correct === false }">Vous devez remplir tous les champs...</div>
+                <div class="snackbar" [ngClass]="{'show': saved === true }">REX publié.</div>
+
+              </div>
             </div>
-
-            <!-- Troisieme ligne -->
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label for="comment">Un commentaire ? </label>
-                  <textarea id="comment" [(ngModel)]="data.comment" class="form-control" rows="3"></textarea>
-                </div>
-              </div>
-            </div>
-
-            <!-- Bouton de soumission -->
-            <div class="row">
-              <div class="col-md-12 text-center spaceY">
-                <button class="btn btn-primary" (click)="submitNewREX()">Soumettre votre REX</button>
-              </div>
-            </div>
-
-
-            <!-- The actual snackbar -->
-            <div class="snackbar" [ngClass]="{'show': correct === false }">Vous devez remplir tous les champs...</div>
-            <div class="snackbar" [ngClass]="{'show': saved === true }">REX publié.</div>
-
           </div>
+
         </div>
       </div>
-
     </div>
-  </div>
-</div>

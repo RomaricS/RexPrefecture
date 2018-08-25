@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Rex } from './model/rex';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Observable } from 'rxjs';
 
@@ -9,37 +8,35 @@ export class RexService {
   rexList: AngularFireList<any>;
   selectedRex;
 
-  public basePath = '/rex';
-
+  pathREX = "/rex";
+  pathPref = "/pref";
 
   constructor(private firebase: AngularFireDatabase) { }
 
-  getRex() {
+  // Get All REX
+  getData() {
     return this.firebase.list('/rex').valueChanges();
   }
 
-  // getRexByPref(pref) : Rex[] {
-  //   return this.firebase.list('/rex',
-  //     res => res.orderByChild('prefecture').equalTo(pref));
-  // }
-
-  insertRex(data: Rex) {
-    const obj = this.firebase.database.ref(this.basePath);
-    obj.push(data);
-    console.log("Succes");
+  // Get All Pref
+  getPref() {
+    return this.firebase.list('/prefList').valueChanges();
+  }
+  
+  // Get All Dept
+  getDept() {
+    return this.firebase.list('/deptList').valueChanges();
   }
 
-  // updateEmployee(employee : Employee){
-  //   this.rexList.update(employee.$key,
-  //     {
-  //       name: employee.name,
-  //       position: employee.position,
-  //       office: employee.office,
-  //       salary: employee.salary
-  //     });
-  // }
+  // Get All Pref
+  getCdsType() {
+    return this.firebase.list('/cdsType').valueChanges();
+  }
 
-  // deleteEmployee($key : string){
-  //   this.rexList.remove($key);
-  // }
+  // Add a new rex
+  addRex(d) {
+    const obj = this.firebase.database.ref(this.pathREX);
+    obj.push(d);
+  }
+
 }

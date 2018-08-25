@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { RexService } from '../rex.service';
+import { Observable } from '@firebase/util';
 
 @Component({
   selector: 'app-submit',
   templateUrl: './submit.component.html',
   styleUrls: ['./submit.component.css']
 })
-export class SubmitComponent implements OnInit {
+
+export class SubmitComponent {
 
   correct;
   today = new Date();
@@ -27,68 +29,29 @@ export class SubmitComponent implements OnInit {
     comment: null
   };
 
-  prefList = [
-    {
-      name: 'Nanterre',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.',
-      id: 1,
-      img: 'assets/img/img.jpg'
-    },
-    {
-      name: 'Antony',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.',
-      id: 2,
-      img: 'assets/img/img.jpg'
-    },
-    {
-      name: 'Bobigny',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.',
-      id: 3,
-      img: 'assets/img/img.jpg'
-    },
-    {
-      name: 'Paris',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.',
-      id: 4,
-      img: 'assets/img/img.jpg'
-    },
-    {
-      name: 'St Germain en Laye',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.',
-      id: 5,
-      img: 'assets/img/img.jpg'
-    },
-    {
-      name: 'Cergy',
-      description: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.',
-      id: 6,
-      img: 'assets/img/img.jpg'
-    }
-  ];
+  prefList;
 
-  cdsType = [
-    {
-      name: 'Etudiant vers Salarié normal (1 an)',
-      id: 1
-    },
-    {
-      name: 'Etudiant vers Salarié Passeport Talent (4 ans)',
-      id: 2
-    },
-    {
-      name: 'APS vers Salarié normal (1 an)',
-      id: 3
-    },
-    {
-      name: 'APS vers Salarié Passeport Talent (4 ans)',
-      id: 4
-    }
-  ];
+  cdsType;
+
+  // Data for subscription
+  b;
+  a;
 
   constructor(public router: Router,
-    private rex: RexService) { }
+    private rex: RexService) {
+    this.a = this.rex.getCdsType();
+    this.a.subscribe(res => {
+      if (res) {
+        this.cdsType = res[0];
+      }
+    });
 
-  ngOnInit() {
+    this.b = this.rex.getPref();
+    this.b.subscribe(res => {
+      if (res) {
+        this.prefList = res;
+      }
+    });
   }
 
   // Calculate full process duration
@@ -115,7 +78,6 @@ export class SubmitComponent implements OnInit {
       this.data.sentAt === null || this.data.fingerprintAt === null ||
       this.data.smsAt === null || this.data.takenAt === null ||
       this.data.prefecture === null || this.data.typeCDS === null) {
-      console.log("Remplir tous les champs");
       return false;
     } else {
       return true;
@@ -128,9 +90,9 @@ export class SubmitComponent implements OnInit {
     if (this.correct) {
       this.calculateduration();
       // Save to firebase
-      this.rex.insertRex(this.data);
+      this.rex.addRex(this.data);
       // Redirection to home
-      // this.router.navigate(['/']);
+       this.router.navigate(['/']);
     }
   }
 }
