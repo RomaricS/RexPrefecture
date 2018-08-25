@@ -38,6 +38,8 @@ export class SubmitComponent {
   // Data for subscription
   b;
   a;
+  deptList;
+  fake = [];
 
   constructor(public router: Router,
     private rex: RexService) {
@@ -49,19 +51,30 @@ export class SubmitComponent {
       }
     });
 
-    // Departements
-    this.b = this.rex.getPref();
-    this.b.subscribe(res => {
-      if (res) {
-        this.prefList = res[0];
-        console.log(res[0]);
-      }
-    });
+      // prefs
+      this.b = this.rex.getPrefDept();
+      this.b.subscribe(res => {
+        if (res) {
+          this.prefList = res[0];
+        }
+      });
+
   }
 
   /*
   transformObjet(data){
-    data.deptName = this.deptlist.filter(res => res.idDept === data.idDept)[0].dept;
+    data.prefList = [];
+    let a = this.prefList.filter(res => res.idDept === data.idDept);
+    for (let i=0;i<a.length;i++){
+      //console.log(a[i]);
+      let d = {
+        idDept : a[i].idDept,
+        id: a[i].id,
+        pref: a[i].pref
+      }
+      data.prefList.push(d);
+    }
+    this.fake.push(data);
     return data;
   }*/
 
