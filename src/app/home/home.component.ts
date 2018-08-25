@@ -38,7 +38,7 @@ export class HomeComponent {
     // Get pref list
     this.rex.getPref().subscribe(res => {
       if (res) {
-        this.data = res;
+        this.data = res[0];
         this.prefList = this.data.sort(function (a, b) {
           const c = a.id;
           const d = b.id;

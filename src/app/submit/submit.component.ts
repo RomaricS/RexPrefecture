@@ -30,6 +30,8 @@ export class SubmitComponent {
   };
 
   prefList;
+  deptlist;
+  finalPrefObj;
 
   cdsType;
 
@@ -39,6 +41,7 @@ export class SubmitComponent {
 
   constructor(public router: Router,
     private rex: RexService) {
+      // types de cds
     this.a = this.rex.getCdsType();
     this.a.subscribe(res => {
       if (res) {
@@ -46,13 +49,21 @@ export class SubmitComponent {
       }
     });
 
+    // Departements
     this.b = this.rex.getPref();
     this.b.subscribe(res => {
       if (res) {
-        this.prefList = res;
+        this.prefList = res[0];
+        console.log(res[0]);
       }
     });
   }
+
+  /*
+  transformObjet(data){
+    data.deptName = this.deptlist.filter(res => res.idDept === data.idDept)[0].dept;
+    return data;
+  }*/
 
   // Calculate full process duration
   calculateduration() {
@@ -71,6 +82,17 @@ export class SubmitComponent {
       this.processInitType = 'envoyé';
     }
   }
+
+    //Sort data before displaying them
+    sortPref(a, b) {
+      const c = a.idDept;
+      const d = b.idDept;
+      if (c<d)
+         return -1;
+      if (c>d)
+         return 1;
+      return 0;
+    }
 
   // Check all required field
   controleFields() {

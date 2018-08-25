@@ -9,7 +9,7 @@ export class RexService {
   selectedRex;
 
   pathREX = "/rex";
-  pathPref = "/pref";
+  pathPref = "/pref1";
 
   constructor(private firebase: AngularFireDatabase) { }
 
@@ -20,7 +20,7 @@ export class RexService {
 
   // Get All Pref
   getPref() {
-    return this.firebase.list('/prefList').valueChanges();
+    return this.firebase.list('/pref1').valueChanges();
   }
   
   // Get All Dept
@@ -38,5 +38,4 @@ export class RexService {
     const obj = this.firebase.database.ref(this.pathREX);
     obj.push(d);
   }
-
 }
