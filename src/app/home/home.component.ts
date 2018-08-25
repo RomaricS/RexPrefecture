@@ -14,6 +14,10 @@ export class HomeComponent {
   prefList;
   data;
   deptList;
+  b;
+  prefDept;
+  searchResult;
+  choice=0;
 
   constructor(
     public router: Router,
@@ -35,6 +39,15 @@ export class HomeComponent {
       }
     });
 
+    // prefs and Dept
+    this.b = this.rex.getPrefDept();
+    this.b.subscribe(res => {
+      if (res) {
+        this.prefDept = res[0];
+      //console.log(this.prefDept);
+      }
+    });
+
     // Get pref list
     this.rex.getPref().subscribe(res => {
       if (res) {
@@ -48,8 +61,17 @@ export class HomeComponent {
             return 1;
           return 0;
         });
+        this.searchResult = this.prefList;
       }
     });
+  }
+
+  searchPref(){
+    if (this.choice == 0){
+      this.searchResult = this.prefList;
+    }else{
+      this.searchResult = this.prefDept.filter(res => res.idDept == this.choice)[0].prefList; 
+    }
   }
 
   filterPref(id) {
@@ -62,10 +84,10 @@ export class HomeComponent {
     }
   }
 
-    viewDetail(id) {
-      if (id) {
-        this.router.navigate(['/detail', id]);
-      }
+  viewDetail(id) {
+    if (id) {
+      this.router.navigate(['/detail', id]);
     }
-
   }
+
+}

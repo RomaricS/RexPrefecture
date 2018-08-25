@@ -1,20 +1,63 @@
 <div class="content">
   <div class="container-fluid">
-    <h4 class="page-title">Liste des Préfectures</h4>
-    <div class="row">
 
-      <div class="col-md-3 pref-box" *ngFor="let pref of prefList;let i = index">
-        <div class="card no-pad" (click)="viewDetail(pref.id)">
-          <img class="card-img-top" src="assets/img/img.jpg" alt="Card image cap">
-          <div class="card-body">
-            <span class="pref-name">
-              {{pref.pref}}
-            </span>
-            <p class="card-text">Une petite description</p>
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Rechercher Un retour d'expérience</h4>
+          <p class="card-category">
+            Pour consulter la liste des REX
+          </p>
+          <ul>
+            <li>
+              Sélectionnez le département
+            </li>
+            <li>
+              Cliquez ensuite sur la préfecture/Sous-Préfecture souhaitée pour être redirigé sur la liste des REX disponibles pour votre
+              choix.
+            </li>
+          </ul>
+        </div>
+        <div class="card-body">
+
+          <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label for="type">Liste des départements
+                </label>
+                <select class="form-control" id="type" [(ngModel)]="choice">
+                  <option value="0">- Toute la France -</option>
+                    <option *ngFor="let dept of deptList" [value]="dept.idDept">{{dept.dept}}</option>
+                </select>
+              </div>           
+            </div>
+            <div class="col-md-6 pad">
+              <div class="form-group">
+                  <button class="btn btn-primary btn-border" (click)="searchPref()">Rechercher <i class="la la-search"></i></button>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
+    </div>
 
+    <div class="col-md-12">
+      <h4 class="page-title">Résultats de votre recherche</h4>
+      <div class="row">
+
+        <div class="col-md-3 pref-box" *ngFor="let pref of searchResult;let i = index">
+          <div class="card no-pad" (click)="viewDetail(pref.id)">
+            <img class="card-img-top" src="assets/img/img.jpg" alt="Card image cap">
+            <div class="card-body">
+              <span class="pref-name">
+                {{pref.pref}}
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </div>
