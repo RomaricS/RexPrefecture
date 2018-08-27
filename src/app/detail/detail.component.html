@@ -26,7 +26,7 @@
     </div>
 
     <div class="row" *ngIf="noInfo === false">
-      <div class="col-md-3 click" *ngFor="let d of rexList; let i = index" (click)="read(i)">
+      <div class="col-md-3 click" *ngFor="let d of rexList; let i = index" (click)="read(d)">
         <div class="card card-stats" [ngClass]="{'card-warning' : d.typeCDS === '1','card-primary' : d.typeCDS === '2','card-success' : d.typeCDS === '3','card-danger' : d.typeCDS === '4' }">
           <div class="card-body">
             <div class="row">
@@ -66,5 +66,6 @@
         </div>
       </div>
     </div>
+
   </div>
 </div>

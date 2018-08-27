@@ -85,6 +85,7 @@ export class HomeComponent {
   }
 
   viewDetail(id) {
+    console.log(id);
     if (id) {
       this.router.navigate(['/detail', id]);
     }

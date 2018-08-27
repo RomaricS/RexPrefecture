@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class RexService {
@@ -11,13 +12,28 @@ export class RexService {
   pathREX = "/rex";
   pathPref = "/pref1";
   pathPrefDept = "/prefDept";
+  fakerex = {};
+
+  private rexDetail = new BehaviorSubject(this.fakerex);
+  currentRex = this.rexDetail.asObservable();
 
   constructor(private firebase: AngularFireDatabase) { }
+
+  // Sharing an object between independent components
+  changeRex(rex) {
+    this.rexDetail.next(rex);
+    console.log(rex);
+  }
 
   // Get All REX
   getData() {
     return this.firebase.list('/rex').valueChanges();
   }
+
+    // Get REX by Id
+    getRexbyPrefId(id) {
+      return this.firebase.list('/rex', ref => ref.orderByChild('prefecture').equalTo(id)).valueChanges();
+    }
 
   // Get All Pref
   getPref() {

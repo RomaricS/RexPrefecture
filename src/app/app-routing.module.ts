@@ -6,9 +6,11 @@ import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
 import { IdeaComponent } from './idea/idea.component';
 import { SubmitComponent } from './submit/submit.component';
+import { RexDetailComponent } from './rex-detail/rex-detail.component';
 
 const routes: Routes = [
   { path: 'detail/:id', component: DetailComponent },
+  { path: 'rex', component: RexDetailComponent },
   { path: 'home', component: HomeComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'submit', component: SubmitComponent },

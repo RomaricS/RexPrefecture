@@ -18,6 +18,7 @@ import { IdeaComponent } from './idea/idea.component';
 import { ContactComponent } from './contact/contact.component';
 import { SubmitComponent } from './submit/submit.component';
 import { RexService } from './rex.service';
+import { RexDetailComponent } from './rex-detail/rex-detail.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { RexService } from './rex.service';
     DetailComponent,
     IdeaComponent,
     ContactComponent,
-    SubmitComponent
+    SubmitComponent,
+    RexDetailComponent
   ],
   imports: [
     BrowserModule,
