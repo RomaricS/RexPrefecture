@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RexService } from '../rex.service';
+// import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-detail',
@@ -14,6 +15,7 @@ export class DetailComponent {
   noInfo = false;
   idPref = 1;
   sub;
+  // closeResult: string;
 
   constructor(
     public router: Router,
