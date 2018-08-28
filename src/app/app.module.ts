@@ -20,6 +20,9 @@ import { SubmitComponent } from './submit/submit.component';
 import { RexService } from './rex.service';
 import { RexDetailComponent } from './rex-detail/rex-detail.component';
 
+// Ng bootstrap
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -35,6 +38,7 @@ import { RexDetailComponent } from './rex-detail/rex-detail.component';
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
+    NgbModule,
     AppRoutingModule,
     FormsModule
   ],
